@@ -1,0 +1,499 @@
+/* =========================================================
+   COFFEE MANAGEMENT SYSTEM
+   GLOBAL DESIGN SYSTEM
+========================================================= */
+
+
+/* =========================================================
+   1. DESIGN SYSTEM
+   Colors, spacing, shadows, radius, typography
+========================================================= */
+
+:root {
+
+    /* ---------- Coffee Colors ---------- */
+
+    --coffee-dark: #3B2720;
+    --coffee: #5A3E32;
+    --coffee-light: #765548;
+
+    /* ---------- Caramel ---------- */
+
+    --caramel-dark: #A96F3F;
+    --caramel: #C68B59;
+    --caramel-light: #D9A066;
+
+    /* ---------- Background ---------- */
+
+    --cream-dark: #E8DED3;
+    --cream: #F5EFE6;
+    --white: #FFFDF8;
+
+    /* ---------- Text ---------- */
+
+    --text-primary: #3B2720;
+    --text-secondary: #7A665C;
+    --text-light: #A89488;
+
+    /* ---------- Status ---------- */
+
+    --success: #5F8D4E;
+    --warning: #D49A3A;
+    --danger: #B85C5C;
+    --info: #6285A8;
+
+    /* ---------- Borders ---------- */
+
+    --border: #E8DED3;
+
+    /* ---------- Shadows ---------- */
+
+    --shadow-sm: 0 2px 8px rgba(59, 39, 32, 0.08);
+    --shadow-md: 0 8px 24px rgba(59, 39, 32, 0.12);
+    --shadow-lg: 0 16px 40px rgba(59, 39, 32, 0.16);
+
+    /* ---------- Border Radius ---------- */
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+
+    /* ---------- Spacing ---------- */
+
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+
+    /* ---------- Typography ---------- */
+
+    --font-main:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+
+/* =========================================================
+   2. RESET & GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--white);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+input,
+select,
+textarea {
+    outline: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   3. APP
+========================================================= */
+
+
+/* =========================================================
+   4. LOGIN
+========================================================= */
+
+
+/* =========================================================
+   5. LAYOUT
+========================================================= */
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+    background: var(--cream);
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    min-height: 100vh;
+    padding: var(--space-xl);
+}
+
+
+/* =========================================================
+   6. NAVBAR / SIDEBAR
+========================================================= */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+
+    background: var(--coffee-dark);
+    color: var(--white);
+
+    display: flex;
+    flex-direction: column;
+
+    padding: var(--space-lg) var(--space-md);
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    box-shadow: var(--shadow-md);
+
+    z-index: 100;
+}
+
+
+/* ---------- Brand ---------- */
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 8px 12px 30px;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--caramel);
+    color: var(--white);
+
+    border-radius: var(--radius-md);
+
+    font-size: 21px;
+}
+
+.sidebar-brand h2 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.sidebar-brand span {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    color: var(--cream-dark);
+}
+
+
+/* ---------- Navigation ---------- */
+
+.sidebar-nav {
+    flex: 1;
+}
+
+.nav-title {
+    padding: 0 12px;
+    margin-bottom: 10px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color: var(--text-light);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px;
+
+    margin-bottom: 5px;
+
+    border-radius: var(--radius-sm);
+
+    color: var(--cream-dark);
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+
+    color: var(--white);
+
+    transform: translateX(3px);
+}
+
+.nav-link.active {
+    background: var(--caramel);
+
+    color: var(--white);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.nav-icon {
+    width: 22px;
+
+    display: flex;
+    justify-content: center;
+
+    font-size: 16px;
+}
+
+
+/* ---------- Sidebar Footer ---------- */
+
+.sidebar-footer {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px 10px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--caramel);
+
+    color: var(--white);
+
+    font-weight: 700;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.user-info strong {
+    font-size: 13px;
+}
+
+.user-info span {
+    font-size: 10px;
+    color: var(--cream-dark);
+}
+
+
+/* =========================================================
+   7. DASHBOARD
+========================================================= */
+
+
+/* =========================================================
+   8. ORDERS
+========================================================= */
+
+
+/* =========================================================
+   9. PRODUCTS
+========================================================= */
+
+
+/* =========================================================
+   10. INVENTORY
+========================================================= */
+
+
+/* =========================================================
+   11. EMPLOYEES
+========================================================= */
+
+
+/* =========================================================
+   12. REPORTS
+========================================================= */
+
+
+/* =========================================================
+   13. MODALS
+========================================================= */
+
+/* =========================================================
+   14. RESPONSIVE
+========================================================= */
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1024px) {
+
+    .sidebar {
+        width: 230px;
+    }
+
+    .main-content {
+        margin-left: 230px;
+        padding: 24px;
+    }
+
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.mobile-menu-button {
+    display: none;
+}
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .mobile-menu-button {
+        display: flex;
+
+        position: fixed;
+        top: 15px;
+        left: 15px;
+
+        width: 45px;
+        height: 45px;
+
+        align-items: center;
+        justify-content: center;
+
+        border: none;
+        border-radius: 10px;
+
+        background: #3B2720;
+        color: white;
+
+        font-size: 22px;
+
+        cursor: pointer;
+
+        z-index: 9999;
+    }
+
+
+    .sidebar {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+        bottom: 0;
+
+        width: 280px;
+
+        transform: translateX(-100%);
+
+        transition: transform 0.25s ease;
+
+        z-index: 9998;
+    }
+
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+
+        padding: 80px 15px 20px;
+    }
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 769px) {
+
+    .sidebar {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 250px;
+    }
+}
