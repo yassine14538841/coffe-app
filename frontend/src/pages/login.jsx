@@ -1,18 +1,20 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import login from "../services/authService";
-import "./Login.css";
-
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("employee");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
 
-    async function handleLogin() {
-        if (email === "" || password === "") {
+    async function handleLogin(event) {
+        event.preventDefault();
+
+        if (email.trim() === "" || password === "") {
             setError("Please fill all fields");
             return;
         }
@@ -25,16 +27,17 @@ function Login() {
 
             console.log("Login successful:", data);
 
-                if (data.user.role === "admin") {
-                    navigate("/dashboard");
-                } else if (data.user.role === "employee") {
-                    navigate("/dashboard");
-                }
-
+            if (
+                data.user.role === "admin" ||
+                data.user.role === "employee"
+            ) {
+                navigate("/dashboard");
+            }
         } catch (error) {
             console.error(error);
             setError(
-                error.message || "Invalid email, password, or account type"
+                error.message ||
+                "Invalid email, password, or account type"
             );
         } finally {
             setLoading(false);
@@ -42,69 +45,127 @@ function Login() {
     }
 
     return (
-        <div className="login-container">
+        <main className="login-page">
+            <section className="login-card">
 
-            <h1 className="title">
-                Cafe Management System
-            </h1>
+                <div className="login-brand-icon" aria-hidden="true">
+                    ☕
+                </div>
 
-            <div className="role-buttons">
-
-                <button
-                    type="button"
-                    className={role === "admin" ? "role-button active" : "role-button"}
-                    onClick={() => setRole("admin")}
-                >
-                    Admin
-                </button>
-
-                <button
-                    type="button"
-                    className={role === "employee" ? "role-button active" : "role-button"}
-                    onClick={() => setRole("employee")}
-                >
-                    Employee
-                </button>
-
-            </div>
-
-            <input
-                className="input"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <br />
-            <br />
-
-            <input
-                className="input"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <br />
-            <br />
-
-            {error && (
-                <p className="error">
-                    {error}
+                <p className="login-eyebrow">
+                    WELCOME TO YOUR CAFÉ
                 </p>
-            )}
 
-            <button
-                className="login-button"
-                onClick={handleLogin}
-                disabled={loading}
-            >
-                {loading ? "Loading..." : "Login"}
-            </button>
+                <h1 className="login-title">
+                    Coffee <span>House</span>
+                </h1>
 
-        </div>
+                <p className="login-subtitle">
+                    Café Management System
+                </p>
+
+                <div className="login-divider">
+                    <span />
+                    <span />
+                    <span />
+                </div>
+
+                <form onSubmit={handleLogin}>
+                    <label className="login-label">
+                        Account type
+                    </label>
+
+                    <div className="login-role-selector">
+                        <button
+                            type="button"
+                            className={
+                                role === "admin"
+                                    ? "login-role-button active"
+                                    : "login-role-button"
+                            }
+                            onClick={() => setRole("admin")}
+                            aria-pressed={role === "admin"}
+                        >
+                            Admin
+                        </button>
+
+                        <button
+                            type="button"
+                            className={
+                                role === "employee"
+                                    ? "login-role-button active"
+                                    : "login-role-button"
+                            }
+                            onClick={() => setRole("employee")}
+                            aria-pressed={role === "employee"}
+                        >
+                            Employee
+                        </button>
+                    </div>
+
+                    <div className="login-field">
+                        <label htmlFor="login-email" className="login-label">
+                            Email address
+                        </label>
+
+                        <input
+                            id="login-email"
+                            className="login-input"
+                            type="email"
+                            placeholder="you@example.com"
+                            value={email}
+                            onChange={(event) =>
+                                setEmail(event.target.value)
+                            }
+                            autoComplete="username"
+                            required
+                        />
+                    </div>
+
+                    <div className="login-field">
+                        <label
+                            htmlFor="login-password"
+                            className="login-label"
+                        >
+                            Password
+                        </label>
+
+                        <input
+                            id="login-password"
+                            className="login-input"
+                            type="password"
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(event) =>
+                                setPassword(event.target.value)
+                            }
+                            autoComplete="current-password"
+                            required
+                        />
+                    </div>
+
+                    {error && (
+                        <p className="login-error" role="alert">
+                            {error}
+                        </p>
+                    )}
+
+                    <button
+                        className="login-submit"
+                        type="submit"
+                        disabled={loading}
+                    >
+                        {loading ? "Signing in..." : "Sign In"}
+                        {!loading && <span aria-hidden="true"> →</span>}
+                    </button>
+                </form>
+
+                <p className="login-footer">
+                    Crafted with care, served with passion.
+                </p>
+
+            </section>
+        </main>
     );
 }
 

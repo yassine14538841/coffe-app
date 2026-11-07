@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const { Pool } = require("pg");
 require("dotenv").config();
 
+
 const pool = new Pool({
     user: "postgres",
     host: "localhost",
@@ -19,7 +20,7 @@ async function test() {
 
         console.log("User found:", result.rows.length);
 
-        if (result.rows.length === 0) {
+        if (result.rows.length === 0) { 
             return;
         }
 
@@ -38,4 +39,4 @@ async function test() {
     }
 }
 
-test();
+test();com
